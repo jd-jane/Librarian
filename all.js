@@ -10,10 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // 處理搜尋輸入 (Enter 鍵)
 function handleKeyPress(e) {
     if (e.key === 'Enter') {
-        const query = e.target.value.trim();
-        if (query) {
-            performSearch(query);
-        }
+        triggerSearch();
+    }
+}
+
+// 觸發搜尋
+function triggerSearch() {
+    const query = document.getElementById('searchInput').value.trim();
+    if (query) {
+        performSearch(query);
     }
 }
 
@@ -135,12 +140,24 @@ function renderHistory() {
 
     section.style.display = 'block';
     tagsContainer.innerHTML = history.map(item => `
-        <span class="history-tag" onclick="clickHistory('${item}')">${item}</span>
+        <span class="history-tag" onclick="clickHistory('${item}')">
+            ${item}
+            <span class="delete-tag" onclick="deleteHistoryItem('${item}', event)">&times;</span>
+        </span>
     `).join('');
 }
 
+function deleteHistoryItem(query, event) {
+    event.stopPropagation(); // 阻止觸發 clickHistory
+    let history = JSON.parse(localStorage.getItem('bookSearchHistory') || '[]');
+    history = history.filter(item => item !== query);
+    localStorage.setItem('bookSearchHistory', JSON.stringify(history));
+    renderHistory();
+}
+
 function clickHistory(query) {
-    document.getElementById('searchInput').value = query;
+    const input = document.getElementById('searchInput');
+    input.value = query;
     performSearch(query);
 }
 

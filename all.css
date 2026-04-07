@@ -30,7 +30,8 @@ body {
 
 .app-container {
     width: 100%;
-    max-width: 800px; /* 桌機端最大寬度 */
+    max-width: 800px;
+    /* 桌機端最大寬度 */
     background: transparent;
     display: flex;
     flex-direction: column;
@@ -39,8 +40,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 搜尋卡片區 */
@@ -50,6 +58,17 @@ body {
     border-radius: 24px;
     box-shadow: 0 10px 30px var(--shadow);
     text-align: center;
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
 }
 
 h1 {
@@ -79,10 +98,35 @@ h1 {
     background: transparent;
     border: none;
     outline: none;
-    width: 100%;
+    flex: 1;
     height: 44px;
     font-size: 1rem;
     color: var(--cocoa-dark);
+}
+
+.search-btn {
+    background: var(--milk-tea-dark);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.search-btn:hover {
+    background: var(--cocoa-dark);
+    transform: scale(1.05);
+}
+
+.search-btn:active {
+    transform: scale(0.95);
 }
 
 /* 歷史紀錄區 */
@@ -131,17 +175,37 @@ h1 {
 
 .history-tag {
     background: var(--milk-tea-light);
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 12px;
     font-size: 0.85rem;
     cursor: pointer;
     transition: 0.3s;
     border: 1px solid rgba(216, 196, 182, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .history-tag:hover {
     background: var(--milk-tea-dark);
     color: white;
+}
+
+.delete-tag {
+    font-size: 1.1rem;
+    line-height: 1;
+    opacity: 0.4;
+    transition: 0.2s;
+    padding: 0 2px;
+}
+
+.delete-tag:hover {
+    opacity: 1;
+    color: #cc0000;
+}
+
+.history-tag:hover .delete-tag {
+    opacity: 0.8;
 }
 
 /* 表格結果區 */
@@ -232,15 +296,29 @@ tr:hover td {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* 響應式調整 */
 @media (max-width: 600px) {
-    body { padding: 10px; }
-    .search-card { padding: 25px 20px; }
-    h1 { font-size: 1.4rem; }
-    .history-tag { padding: 6px 12px; font-size: 0.8rem; }
+    body {
+        padding: 10px;
+    }
+
+    .search-card {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .history-tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
 
     /* 表格轉卡片 */
     .table-wrapper {
@@ -248,7 +326,12 @@ tr:hover td {
         overflow-x: visible;
     }
 
-    table, thead, tbody, th, td, tr {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
         display: block;
     }
 
