@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖書管理員小幫手 | Librarian Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="all.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <div class="search-card">
+            <h1>圖書小幫手</h1>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="輸入書名、作者或系列..." onkeypress="handleKeyPress(event)">
+                <div class="loader" id="loader"></div>
+            </div>
+        </div>
+
+        <div class="history-section" id="historySection" style="display:none;">
+            <div class="history-header">
+                <span class="history-title">最近搜尋紀錄</span>
+                <button class="clear-btn" onclick="clearHistory()">清除</button>
+            </div>
+            <div class="history-tags" id="historyTags"></div>
+        </div>
+
+        <div class="results-container">
+            <div class="table-wrapper">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>書名</th>
+                            <th>作者</th>
+                            <th>ISBN</th>
+                            <th>博客來</th>
+                            <th>北市圖</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            <button class="more-btn" id="expandBtn" onclick="toggleMore()" style="display:none;">展開更多結果</button>
+        </div>
+    </div>
+
+    <script src="all.js"></script>
+</body>
+
+</html>
